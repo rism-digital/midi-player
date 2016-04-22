@@ -168,9 +168,9 @@ var MidiPlayer = {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
           if (midiPlayer_input != null) {
-              console.log("MidiPlayer is loaded");
+              console.log("MIDI file set");
               midiPlayer_input = null;
-              play();
+              setTimeout(play(), 200);
           }
   
         }

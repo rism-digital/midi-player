@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>A MIDI player</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script sync type="text/javascript" src="wildwebmidi.js"></script>
+        <script src="midiplayer.js"></script>
+        <script src="example-song.js"></script>
+        <link rel="stylesheet" href="midiplayer.css">
+    </head>
+    <body>
+        <div id="player"></div><script type="text/javascript">
+            
+            var midiUpdate = function(time) {
+                console.log(time);
+            }
+            var midiStop = function() {
+                console.log("Stop");
+            }
+
+            $( document ).ready(function() {
+                $("#player").midiPlayer({
+                    color: "red",
+                    onUnpdate: midiUpdate,
+                    onStop: midiStop,
+                    width: 250
+                });
+                $("#player").midiPlayer.play(song);
+          });
+        </script>
+  </body>
+</html>

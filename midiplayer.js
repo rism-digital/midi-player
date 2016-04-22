@@ -87,7 +87,6 @@ function pauseAudio() {
  */
 
 var ULONG_MAX = 4294967295;
-var MidiPlayer = MidiModule();
 var _EM_signalStop = 0;
 var _EM_seekSamples = ULONG_MAX;
 
@@ -146,6 +145,8 @@ var midiPlayer_stop;
 var midiPlayer_totalTime;
 
 // variables
+var midiPlayer_isLoaded = false;
+var midiPlayer_input = null;
 var midiPlayer_lastMillisec = 0;
 var midiPlayer_midiName = ''
 var midiPlayer_convertionJob = null;
@@ -158,6 +159,23 @@ var BASE64_MARKER = ';base64,';
 // callbacks
 var midiPlayer_onStop = null;
 var midiPlayer_onUpdate = null;
+
+var MidiPlayer = {
+  totalDependencies: 0,
+  monitorRunDependencies: function(left) {
+      if (left == 0) {
+          console.log("MidiPlayer is loaded");
+          midiPlayer_isLoaded = true;
+          if (midiPlayer_input != null) {
+              console.log("MidiPlayer is loaded");
+              midiPlayer_input = null;
+              play();
+          }
+          
+      }
+  }
+};
+MidiModule(MidiPlayer); 
 
  
 function onAudioProcess(audioProcessingEvent) {
@@ -307,13 +325,18 @@ function runConversion() {
         
         $.fn.midiPlayer.play = function (song) {
             var byteArray = convertDataURIToBinary(song);
-            if (midiPlayer_totalSamples > 0) {
-                stop();
-                // a timeout is necessary because otherwise writing to the disk is not done
-                setTimeout(function() {convertFile("test.midi", byteArray);}, 500);
+            if (midiPlayer_isLoaded == false) {
+                midiPlayer_input = song;
             }
             else {
-                convertFile("test.midi", byteArray);
+                if (midiPlayer_totalSamples > 0) {
+                    stop();
+                    // a timeout is necessary because otherwise writing to the disk is not done
+                    setTimeout(function() {convertFile("test.midi", byteArray);}, 500);
+                }
+                else {
+                    convertFile("test.midi", byteArray);
+                }
             }
         };
         

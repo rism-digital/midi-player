@@ -1,5 +1,23 @@
 
 
+var midiPlayer_isLoaded = false;
+var MidiPlayer = {
+  totalDependencies: 0,
+  monitorRunDependencies: function(left) {
+      console.log("Dep", left);
+      if (left == 0) {
+          console.log("MidiPlayer is loaded");
+          midiPlayer_isLoaded = true;
+          if (midiPlayer_input != null) {
+              console.log("MidiPlayer is loaded");
+              midiPlayer_input = null;
+              SetTimeout(play(), 200);
+          }
+  
+      }
+  }
+};
+
 /************************************************************************
  * Circular Web Audio Buffer Queue
  */
@@ -38,7 +56,7 @@ CircularAudioBuffer.prototype.full = function () {
 // returns a reference to next available buffer to be filled
 CircularAudioBuffer.prototype.prepare = function () {
     if (this.full()) {
-        //console.log('buffers full!!')
+        console.log('buffers full!!')
         return
     }
     var buffer = this.buffers[ this.filled++];
@@ -80,17 +98,37 @@ function pauseAudio() {
     scriptNode.disconnect();
 }
 
+
+
 /************************************************************************
  * Emscripten variables and callback - cannot be renamed
  */
 
+/*
+var MidiPlayer = {
+  totalDependencies: 0,
+  monitorRunDependencies: function(left) {
+      if (left == 0) {
+          console.log("MidiPlayer is loaded");
+          var midiPlayer_isLoaded = true;
+          if (midiPlayer_input != null) {
+              console.log("MidiPlayer is loaded");
+              midiPlayer_input = null;
+              play();
+          }
+          
+      }
+  }
+};
+MidiModule(MidiPlayer); 
+*/
+
 var ULONG_MAX = 4294967295;
-var MidiPlayer = MidiModule(); 
 var _EM_signalStop = 0;
 var _EM_seekSamples = ULONG_MAX;
 
 function processAudio(buffer_loc, size) {
-    buffer = circularBuffer.prepare();
+    var buffer = circularBuffer.prepare();
     var left_buffer_f32 = buffer.getChannelData(0);
     var right_buffer_f32 = buffer.getChannelData(1);
     
@@ -145,7 +183,6 @@ var midiPlayer_totalTime;
 
 // variables
 var midiPlayer_lastMillisec = 0;
-var midiPlayer_isLoaded = true;
 var midiPlayer_input = null;
 var midiPlayer_midiName = ''
 var midiPlayer_convertionJob = null;

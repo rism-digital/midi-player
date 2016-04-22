@@ -162,15 +162,17 @@ var midiPlayer_onUpdate = null;
 
 var MidiPlayer = {
     noInitialRun: true,
-    totalDependencies: 0,
+    totalDependencies: 1,
     monitorRunDependencies: function(left) {
+        console.log(this.totalDependencies);
+        console.log(left);
         if (left == 0) {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
           if (midiPlayer_input != null) {
               console.log("MIDI file set");
+              convertFile("test.midi", convertDataURIToBinary(midiPlayer_input));
               midiPlayer_input = null;
-              setTimeout(play(), 200);
           }
   
         }
@@ -325,11 +327,11 @@ function runConversion() {
         options.updateRate = Math.max(options.updateRate, 10);
         
         $.fn.midiPlayer.play = function (song) {
-            var byteArray = convertDataURIToBinary(song);
             if (midiPlayer_isLoaded == false) {
                 midiPlayer_input = song;
             }
             else {
+                var byteArray = convertDataURIToBinary(song);
                 if (midiPlayer_totalSamples > 0) {
                     stop();
                     // a timeout is necessary because otherwise writing to the disk is not done

@@ -1,23 +1,5 @@
 
 
-var midiPlayer_isLoaded = false;
-var MidiPlayer = {
-  totalDependencies: 0,
-  monitorRunDependencies: function(left) {
-      console.log("Dep", left);
-      if (left == 0) {
-          console.log("MidiPlayer is loaded");
-          midiPlayer_isLoaded = true;
-          if (midiPlayer_input != null) {
-              console.log("MidiPlayer is loaded");
-              midiPlayer_input = null;
-              setTimeout(play(), 200);
-          }
-  
-      }
-  }
-};
-
 /************************************************************************
  * Circular Web Audio Buffer Queue
  */
@@ -56,7 +38,7 @@ CircularAudioBuffer.prototype.full = function () {
 // returns a reference to next available buffer to be filled
 CircularAudioBuffer.prototype.prepare = function () {
     if (this.full()) {
-        console.log('buffers full!!')
+        //console.log('buffers full!!')
         return
     }
     var buffer = this.buffers[ this.filled++];
@@ -104,26 +86,8 @@ function pauseAudio() {
  * Emscripten variables and callback - cannot be renamed
  */
 
-/*
-var MidiPlayer = {
-  totalDependencies: 0,
-  monitorRunDependencies: function(left) {
-      if (left == 0) {
-          console.log("MidiPlayer is loaded");
-          var midiPlayer_isLoaded = true;
-          if (midiPlayer_input != null) {
-              console.log("MidiPlayer is loaded");
-              midiPlayer_input = null;
-              play();
-          }
-          
-      }
-  }
-};
-MidiModule(MidiPlayer); 
-*/
-
 var ULONG_MAX = 4294967295;
+var MidiPlayer = MidiModule();
 var _EM_signalStop = 0;
 var _EM_seekSamples = ULONG_MAX;
 
@@ -183,7 +147,6 @@ var midiPlayer_totalTime;
 
 // variables
 var midiPlayer_lastMillisec = 0;
-var midiPlayer_input = null;
 var midiPlayer_midiName = ''
 var midiPlayer_convertionJob = null;
 var midiPlayer_currentSamples = 0;
@@ -343,19 +306,15 @@ function runConversion() {
         options.updateRate = Math.max(options.updateRate, 10);
         
         $.fn.midiPlayer.play = function (song) {
-            if (midiPlayer_isLoaded) {
-                var byteArray = convertDataURIToBinary(song);
-                if (midiPlayer_totalSamples > 0) {
-                    stop();
-                    // a timeout is necessary because otherwise writing to the disk is not done
-                    setTimeout(function() {convertFile("test.midi", byteArray);}, 500);
-                }
-                else {
-                    convertFile("test.midi", byteArray);
-                }
+            var byteArray = convertDataURIToBinary(song);
+            if (midiPlayer_totalSamples > 0) {
+                stop();
+                // a timeout is necessary because otherwise writing to the disk is not done
+                setTimeout(function() {convertFile("test.midi", byteArray);}, 500);
             }
-            else 
-                midiPlayer_input = song;
+            else {
+                convertFile("test.midi", byteArray);
+            }
         };
         
         $.fn.midiPlayer.seek = function (millisec) {

@@ -161,9 +161,10 @@ var midiPlayer_onStop = null;
 var midiPlayer_onUpdate = null;
 
 var MidiPlayer = {
-  totalDependencies: 0,
-  monitorRunDependencies: function(left) {
-      if (left == 0) {
+    noInitialRun: true,
+    totalDependencies: 0,
+    monitorRunDependencies: function(left) {
+        if (left == 0) {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
           if (midiPlayer_input != null) {
@@ -171,9 +172,9 @@ var MidiPlayer = {
               midiPlayer_input = null;
               play();
           }
-          
-      }
-  }
+  
+        }
+    }
 };
 MidiModule(MidiPlayer); 
 

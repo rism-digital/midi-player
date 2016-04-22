@@ -11,7 +11,7 @@ var MidiPlayer = {
           if (midiPlayer_input != null) {
               console.log("MidiPlayer is loaded");
               midiPlayer_input = null;
-              SetTimeout(play(), 200);
+              setTimeout(play(), 200);
           }
   
       }

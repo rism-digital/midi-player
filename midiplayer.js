@@ -1,5 +1,3 @@
-
-
 /************************************************************************
  * Circular Web Audio Buffer Queue
  */
@@ -171,8 +169,7 @@ var MidiPlayer = {
           midiPlayer_isLoaded = true;
           if (midiPlayer_input != null) {
               console.log("MIDI file set");
-              convertFile("test.midi", convertDataURIToBinary(midiPlayer_input));
-              midiPlayer_input = null;
+              setTimeout(function() {convertFile("midi.midi", convertDataURIToBinary(midiPlayer_input));}, 100);
           }
   
         }
@@ -237,6 +234,7 @@ function convertDataURIToBinary(dataURI) {
 
 function convertFile(file, data) {
     midiPlayer_midiName = file;
+    midiPlayer_input = null;
     console.log('open ', midiPlayer_midiName);
     MidiPlayer['FS'].writeFile(midiPlayer_midiName, data, {
         encoding: 'binary'
@@ -335,10 +333,10 @@ function runConversion() {
                 if (midiPlayer_totalSamples > 0) {
                     stop();
                     // a timeout is necessary because otherwise writing to the disk is not done
-                    setTimeout(function() {convertFile("test.midi", byteArray);}, 500);
+                    setTimeout(function() {convertFile("player.midi", byteArray);}, 200);
                 }
                 else {
-                    convertFile("test.midi", byteArray);
+                    convertFile("player.midi", byteArray);
                 }
             }
         };
@@ -353,8 +351,6 @@ function runConversion() {
         $.fn.midiPlayer.stop = function () {
             stop();
         };
-        
-        
         
         // Create the player
         this.append("<div id=\"midiPlayer_div\"></div>");
@@ -412,25 +408,6 @@ function runConversion() {
                 updateProgress(midiPlayer_currentSamples, midiPlayer_totalSamples);
             }
         }
-        
-        
-        
-        /*
-        $("a")
-        .mousedown(function() {
-            isDragging = false;
-        })
-        .mousemove(function() {
-            isDragging = true;
-         })
-        .mouseup(function() {
-            var wasDragging = isDragging;
-            isDragging = false;
-            if (!wasDragging) {
-                $("#throbble").toggle();
-            }
-        });
-        */
         
         return;
     };

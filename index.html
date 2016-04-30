@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>A MIDI player</title>
+        <title>JavaScript MIDI player</title>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script type="text/javascript" src="wildwebmidi.js"></script>
         <script type="text/javascript" src="midiplayer.js"></script>
@@ -11,7 +11,9 @@
         <link rel="stylesheet" href="midiplayer.css">
     </head>
     <body>
-        <div id="player"></div><script type="text/javascript">
+        <div id="player" style="position: fixed; top: 50%; left: 50%; margin-top: -50px; margin-left: -225px;"> 
+        </div>
+        <script type="text/javascript">
             
             var midiUpdate = function(time) {
                 console.log(time);

@@ -60,17 +60,25 @@ var SAMPLE_RATE = 44100;
 var BUFFER = 4096;
 var channels = 2;
 
-var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-var source = audioCtx.createBufferSource();
-var scriptNode = audioCtx.createScriptProcessor(BUFFER, 0, channels);
-var circularBuffer = new CircularAudioBuffer(4);
-var emptyBuffer = audioCtx.createBuffer(channels, BUFFER, SAMPLE_RATE);
+var audioCtx;
+var source;
+var scriptNode;
+var circularBuffer;
+var emptyBuffer;
 
-scriptNode.onaudioprocess = onAudioProcess;
-source.connect(scriptNode);
-source.start(0);
+function initAudio() {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    source = audioCtx.createBufferSource();
+    scriptNode = audioCtx.createScriptProcessor(BUFFER, 0, channels);
+    circularBuffer = new CircularAudioBuffer(4);
+    emptyBuffer = audioCtx.createBuffer(channels, BUFFER, SAMPLE_RATE);
+    
+    scriptNode.onaudioprocess = onAudioProcess;
+    source.connect(scriptNode);
+    source.start(0);
+}
 
-function startAudio() {
+function startAudio() {    
     scriptNode.connect(audioCtx.destination);
 }
 
@@ -167,6 +175,7 @@ var MidiPlayer = {
         if (left == 0) {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
+          setTimeout(initAudio, 50);
           if (midiPlayer_input != null) {
               console.log("MIDI file set");
               setTimeout(function() {convertFile("midi.midi", convertDataURIToBinary(midiPlayer_input));}, 100);

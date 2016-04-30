@@ -175,10 +175,10 @@ var MidiPlayer = {
         if (left == 0) {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
-          setTimeout(initAudio, 50);
+          setTimeout(initAudio, 100);
           if (midiPlayer_input != null) {
               console.log("MIDI file set");
-              setTimeout(function() {convertFile("midi.midi", convertDataURIToBinary(midiPlayer_input));}, 100);
+              setTimeout(function() {convertFile("midi.midi", convertDataURIToBinary(midiPlayer_input));}, 200);
           }
   
         }

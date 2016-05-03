@@ -1,0 +1,3 @@
+[submodule "wildmidi"]
+	path = wildmidi
+	url = https://github.com/Mindwerks/wildmidi

@@ -167,7 +167,7 @@ var midiPlayer_onStop = null;
 var midiPlayer_onUpdate = null;
 
 var MidiPlayer = {
-    filePackagePrefixURL: "http://rism-ch.org/midi-player/",
+    filePackagePrefixURL: "http://rism-ch.github.io/midi-player/",
     noInitialRun: true,
     totalDependencies: 1,
     monitorRunDependencies: function(left) {

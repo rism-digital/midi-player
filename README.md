@@ -1,9 +1,9 @@
-#MIDI Player
+# MIDI Player
 
 
 MIDI Player is a JavaScript player based on [Wild Web Midi](https://github.com/zz85/wild-web-midi) with a simple jQuery interface. It uses instrument patches from [Freepats](http://freepats.zenvoid.org/).
 
-##Demo and example use
+## Demo and example use
 
 Try this [demo](http://rism-ch.github.io/midi-player/) for seeing / hearing it running.
 
@@ -24,6 +24,8 @@ $( document ).ready(function() {
     $("#player").midiPlayer.play(song);
 });
 ```
+
+Remark: you also need to include the `wildwebmidi.data` file that needs to be accessible from the root or your site.
 
 The source code of the demo is available [here](https://github.com/rism-ch/midi-player/tree/gh-pages)
 

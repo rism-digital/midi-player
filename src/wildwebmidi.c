@@ -539,6 +539,7 @@ int wildwebmidi(char* midi_file, char* wav_file, int sleep) {
                 });
 
                 if (buffer_full) {
+                    // EM_ASM_({console.warn('Full buffer!')});
                     msleep(sleep);
                     continue;
                 }

@@ -54,6 +54,7 @@ else {
 FLAGS += ' -s EMTERPRETIFY=1 ';
 FLAGS += ' -s EMTERPRETIFY_ASYNC=1 ';
 FLAGS += ' -s EMTERPRETIFY_WHITELIST="[\'_wildwebmidi\']" ';
+FLAGS += " -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\"]'";
 
 /* DEBUG FLAGS */
 // var DEBUG_FLAGS = ' -g '; FLAGS += DEBUG_FLAGS;

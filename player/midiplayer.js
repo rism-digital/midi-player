@@ -178,7 +178,7 @@ var MidiPlayer = {
     monitorRunDependencies: function(left) {
         //console.log(this.totalDependencies);
         //console.log(left);
-        if (left == 0) {
+        if ((left == 0) && !midiPlayer_isLoaded) {
           console.log("MidiPlayer is loaded");
           midiPlayer_isLoaded = true;
         }

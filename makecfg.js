@@ -10,6 +10,7 @@ file = '016_Hammond_Organ'; // good
 
 file = '001_Acoustic_Brite_Piano';
 file = '000_Acoustic_Grand_Piano'; // ok
+file = 'default';
 
 
 for (i=0;i<127;i++) console.log(i + ' Tone_000/' + file + '.pat amp=120 pan=center')

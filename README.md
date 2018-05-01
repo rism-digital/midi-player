@@ -25,9 +25,15 @@ $( document ).ready(function() {
 });
 ```
 
-Remark: you also need to include the `wildwebmidi.data` file that needs to be accessible from the root or your site.
+Remark: you also need to include the `wildwebmidi.data` file that needs to be accessible from the root of your site.
 
 The source code of the demo is available [here](https://github.com/rism-ch/midi-player/tree/gh-pages)
+
+## MIDI instruments
+
+The player uses a piano sound font by default. Other instruments can be used, but only one at a time. For this, you need to replace the `wildwebmidi.js` and the `wildwebmidi.data` files with the instrument files you want from the [`./intruments`](https://github.com/rism-ch/midi-player/tree/master/instruments) files.
+
+For example, for using the church organ, you need to include `019_church_organ.js` in your page and have `019_church_organ.data` accessible from the root of your site.
 
 ## Building it
 

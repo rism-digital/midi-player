@@ -358,6 +358,10 @@ function runConversion() {
                 }
             }
         };
+
+        $.fn.midiPlayer.pause = function () {
+            pause();
+        };
         
         $.fn.midiPlayer.seek = function (millisec) {
             if (midiPlayer_totalSamples == 0) return;

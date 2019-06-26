@@ -8,12 +8,17 @@
         <script type="text/javascript" src="wildwebmidi.js"></script>
         <script type="text/javascript" src="midiplayer.js"></script>
         <script type="text/javascript" src="example-song.js"></script>
+        <script type="text/javascript" src="example-song2.js"></script>
         <link rel="stylesheet" href="midiplayer.css">
     </head>
     <body>
-        <div style="position: fixed; top: 50%; left: 50%; margin-top: -50px; margin-left: -225px;"> 
+        <div>
             <a href="javascript:startPlaying();">Click to play!</a>
             <div id="player"></div>
+        </div>
+        <div>
+            <a href="javascript:startPlaying2();">Click to play!</a>
+            <div id="player2"></div>
         </div>
         <script type="text/javascript">
             
@@ -25,16 +30,27 @@
             }
             
             function startPlaying() {
-                $("#player").midiPlayer.play(song);
+                player.playSong(song);
             }
-
+        
+            function startPlaying2() {
+                player2.playSong(song2);
+            }
+        
             $( document ).ready(function() {
-                $("#player").midiPlayer({
-                    color: "red",
-                    onUpdate: midiUpdate,
-                    onStop: midiStop,
-                    width: 250
-                });
+                player = new MidiPlayerClass("player",{
+                                                        color: "red",
+                                                        onUpdate: midiUpdate,
+                                                        onStop: midiStop,
+                                                        width: 250
+                                                        });
+                                
+                player2 = new MidiPlayerClass("player2",{
+                                                        color: "blue",
+                                                        onUpdate: midiUpdate,
+                                                        onStop: midiStop,
+                                                        width: 250
+                                                        });
           });
         </script>
   </body>

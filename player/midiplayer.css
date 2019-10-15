@@ -1,9 +1,10 @@
-.midiPlayer_div{width:700px;height:36px;background:#999;}
-.midiPlayer_bar{height:12px;width:500px;background:#ccc;cursor:pointer;display:inline-block;}
-.midiPlayer_progress{margin:0;background:#555;width:0;height:100%;}
-.midiPlayer_playingTime{width:45px;margin:8px;font-size:16px;text-align:right;font-family:arial;display:inline-block;}
-.midiPlayer_totalTime{width:40px;text-align:right;margin:8px;font-size:16px;font-family:arial;display:inline-block;}
-.midiPlayer_div a.icon{margin:3px;cursor:pointer;background-color:#eee;border:2px solid #ccc;display:inline-block;position:relative;vertical-align:top;display: none;}
+.midiPlayer_div{display:table;width:100%;max-width:700px;height:36px;background:#999;}
+.midiPlayer_bar{height:12px;vertical-align:middle;width:auto;background:#ccc;cursor:pointer;display:table-cell;border:2px solid transparent;}
+.midiPlayer_progress{border-radius:12px;background:#555;width:0;height:12px;}
+.midiPlayer_playingTime{width:45px;margin:8px;font-size:16px;text-align:center;vertical-align:middle;font-family:arial;display:table-cell;}
+.midiPlayer_totalTime{width:45px;margin:8px;font-size:16px;text-align:center;vertical-align:middle;font-family:arial;display:table-cell;}
+.midiPlayer_controllers{width:80px;background:#ccc;display:table-cell;}
+.midiPlayer_div a.icon{margin:4px;cursor:pointer;background-color:#eee;border:2px solid #ccc;display:inline-block;position:relative;vertical-align:top;display: none;}
 .midiPlayer_div a.icon:after,
 .midiPlayer_div a.icon:before{background:#eee;border:2px solid #ccc;content:'';position:absolute;}
 .midiPlayer_div a.icon:hover,

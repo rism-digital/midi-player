@@ -13,33 +13,33 @@
     </head>
     <body>
         <div>
-            <a href="javascript:startPlaying();">Click to play!</a>
             <div id="player"></div>
         </div>
+        <br/>
         <div>
-            <a href="javascript:startPlaying2();">Click to play!</a>
             <div id="player2"></div>
         </div>
         <script type="text/javascript">
             
+            function loadScore() {
+                player.loadSong(song);
+            }
+        
+            function loadScore2() {
+                player2.loadSong(song2);
+            }
+        
             var midiUpdate = function(time) {
                 console.log(time);
             }
             var midiStop = function() {
                 console.log("Stop");
             }
-            
-            function startPlaying() {
-                player.playSong(song);
-            }
-        
-            function startPlaying2() {
-                player2.playSong(song2);
-            }
         
             $( document ).ready(function() {
                 player = new MidiPlayerClass("player",{
                                                         color: "red",
+                                                        loadSong: loadScore,
                                                         onUpdate: midiUpdate,
                                                         onStop: midiStop,
                                                         width: 250
@@ -47,6 +47,7 @@
                                 
                 player2 = new MidiPlayerClass("player2",{
                                                         color: "blue",
+                                                        loadSong: loadScore2,
                                                         onUpdate: midiUpdate,
                                                         onStop: midiStop,
                                                         width: 250

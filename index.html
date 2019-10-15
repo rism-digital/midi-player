@@ -8,33 +8,50 @@
         <script type="text/javascript" src="wildwebmidi.js"></script>
         <script type="text/javascript" src="midiplayer.js"></script>
         <script type="text/javascript" src="example-song.js"></script>
+        <script type="text/javascript" src="example-song2.js"></script>
         <link rel="stylesheet" href="midiplayer.css">
     </head>
     <body>
-        <div style="position: fixed; top: 50%; left: 50%; margin-top: -50px; margin-left: -225px;"> 
-            <a href="javascript:startPlaying();">Click to play!</a>
+        <div>
             <div id="player"></div>
+        </div>
+        <br/>
+        <div>
+            <div id="player2"></div>
         </div>
         <script type="text/javascript">
             
+            function loadScore() {
+                player.loadSong(song);
+            }
+        
+            function loadScore2() {
+                player2.loadSong(song2);
+            }
+        
             var midiUpdate = function(time) {
                 console.log(time);
             }
             var midiStop = function() {
                 console.log("Stop");
             }
-            
-            function startPlaying() {
-                $("#player").midiPlayer.play(song);
-            }
-
+        
             $( document ).ready(function() {
-                $("#player").midiPlayer({
-                    color: "red",
-                    onUpdate: midiUpdate,
-                    onStop: midiStop,
-                    width: 250
-                });
+                player = new MidiPlayerClass("player",{
+                                                        color: "red",
+                                                        loadSong: loadScore,
+                                                        onUpdate: midiUpdate,
+                                                        onStop: midiStop,
+                                                        width: 250
+                                                        });
+                                
+                player2 = new MidiPlayerClass("player2",{
+                                                        color: "blue",
+                                                        loadSong: loadScore2,
+                                                        onUpdate: midiUpdate,
+                                                        onStop: midiStop,
+                                                        width: 250
+                                                        });
           });
         </script>
   </body>

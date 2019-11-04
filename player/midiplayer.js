@@ -184,8 +184,6 @@ var MidiPlayer = {
         }
     }
 };
-MidiModule(MidiPlayer); 
-
  
 function onAudioProcess(audioProcessingEvent) {
     var generated = circularBuffer.use();
@@ -342,6 +340,10 @@ function runConversion() {
         // update rate should not be less than 10 milliseconds
         options.updateRate = Math.max(options.updateRate, 10);
         
+        if(options.locateFile) MidiPlayer.locateFile = options.locateFile;
+
+        MidiModule(MidiPlayer);
+
         $.fn.midiPlayer.play = function (song) {
             if (midiPlayer_isLoaded == false) {
                 midiPlayer_input = song;

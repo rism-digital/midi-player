@@ -19,13 +19,17 @@ $( document ).ready(function() {
         color: "red",
         onUnpdate: midiUpdate,
         onStop: midiStop,
-        width: 250
+        width: 250,
+        locateFile: function(file) {
+          //locate wildwebmidi.data
+          return '/path/to/'+file;
+        }
     });
     $("#player").midiPlayer.play(song);
 });
 ```
 
-Remark: you also need to include the `wildwebmidi.data` file that needs to be accessible from the root of your site.
+Remark: you also need to include the `wildwebmidi.data` file that needs to be retrieved by locateFile option, or accessible from the root of your site if not specified.
 
 The source code of the demo is available [here](https://github.com/rism-ch/midi-player/tree/gh-pages)
 

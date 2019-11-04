@@ -20,10 +20,10 @@ $( document ).ready(function() {
         onUnpdate: midiUpdate,
         onStop: midiStop,
         width: 250,
-	locateFile: function(file) {
-		//locate wildwebmidi.data
-		return '/path/to/'+file;
-	}
+	    locateFile: function(file) {
+            //locate wildwebmidi.data
+            return '/path/to/'+file;
+        }
     });
     $("#player").midiPlayer.play(song);
 });

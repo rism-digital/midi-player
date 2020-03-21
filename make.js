@@ -39,7 +39,7 @@ var DEFINES = '';
 var FLAGS = OPTIMIZE_FLAGS;
 
 var MEM = 64 * 1024 * 1024; // 64MB
-FLAGS += ' --memory-init-file 0 -s MODULARIZE=1 -s EXPORT_NAME="\'MidiModule\'"'
+FLAGS += ' --memory-init-file 0  -s SINGLE_FILE=1 -s WASM=1 -s MODULARIZE=1 -s EXPORT_NAME="\'MidiModule\'"'
 FLAGS += ' -s TOTAL_MEMORY=' + MEM + ' ';
 
 
@@ -137,10 +137,12 @@ var INSTRUMENTS = [
 ];
 */
 
-FLAGS += ' -s EMTERPRETIFY=1 ';
-FLAGS += ' -s EMTERPRETIFY_ASYNC=1 ';
-FLAGS += ' -s EMTERPRETIFY_WHITELIST="[\'_wildwebmidi\']" ';
-FLAGS += " -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\"]'";
+//FLAGS += ' -s EMTERPRETIFY=1 ';
+//FLAGS += ' -s EMTERPRETIFY_ASYNC=1 ';
+//FLAGS += ' -s EMTERPRETIFY_WHITELIST="[\'_wildwebmidi\']" ';
+
+FLAGS += ' -s ASYNCIFY ';
+FLAGS += " -s EXTRA_EXPORTED_RUNTIME_METHODS='[\"ccall\", \"FS\"]'";
 
 /* DEBUG FLAGS */
 // var DEBUG_FLAGS = ' -g '; FLAGS += DEBUG_FLAGS;
@@ -155,7 +157,7 @@ INCLUDES += '-Iwildmidi/include ';
 var compile = EMCC + ' ' + INCLUDES
 	+ sources.join(' ')
 	+ FLAGS + ' ' + DEFINES
-	+ ' -s EXPORTED_FUNCTIONS="[\'_wildwebmidi\', \'FS\']" ' ;
+	+ ' -s EXPORTED_FUNCTIONS="[\'_wildwebmidi\']" ' ;
 
 var
 	exec = require('child_process').exec,

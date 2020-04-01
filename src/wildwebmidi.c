@@ -632,9 +632,7 @@ int wildwebmidi(char* midi_file, char* wav_file, int sleep) {
 }
 
 static void completeConversion(int status) {
-    EM_ASM(
-        completeConversion(status);
-    );
+    EM_ASM(completeConversion($0), status);
 }
 
 

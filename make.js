@@ -191,7 +191,7 @@ function nextJob() {
 	   console.log('running ' + instCmd);
 	   
 	   var gzip = 'gzip -c ' + output + ' > ' + output + '.gz';
-	   console.log('running ' + instCmd);
+	   console.log('running ' + gzip);
 	   
 	   var all = instCmd + ';' + gzip;
 	   exec(all, onExec);

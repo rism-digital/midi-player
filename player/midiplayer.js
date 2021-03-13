@@ -68,7 +68,7 @@ var circularBuffer;
 var emptyBuffer;
 
 function initAudio() {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)({sampleRate:SAMPLE_RATE});
     scriptNode = audioCtx.createScriptProcessor(BUFFER, 0, channels);
     scriptNode.onaudioprocess = onAudioProcess;
     
@@ -190,7 +190,8 @@ function onAudioProcess(audioProcessingEvent) {
     
     if (!generated && midiPlayer_drainBuffer) {
         // wait for remaining buffer to drain before disconnect audio
-        pauseAudio();
+	if (_EM_signalStop == 2) // If paused only. If stopped, let the buffer be emptied
+           pauseAudio();
         midiPlayer_drainBuffer = false;
         return;
     }
@@ -283,7 +284,8 @@ function stop() {
     _EM_signalStop = 1;
     _EM_seekSamples = 0;
     circularBuffer.reset();
-    
+    pauseAudio();
+	
     midiPlayer_totalSamples = 0;
     midiPlayer_currentSamples = ULONG_MAX;
     midiPlayer_progress.style.width = '0%';

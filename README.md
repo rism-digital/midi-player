@@ -17,7 +17,7 @@ Once included in your page, you only need to do (where song is a Base64 coded mi
 $( document ).ready(function() {
     $("#player").midiPlayer({
         color: "red",
-        onUnpdate: midiUpdate,
+        onUpdate: midiUpdate,
         onStop: midiStop,
         width: 250,
         locateFile: function(file) {

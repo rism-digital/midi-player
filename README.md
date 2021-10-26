@@ -5,7 +5,7 @@ MIDI Player is a JavaScript player based on [Wild Web Midi](https://github.com/z
 
 ## Demo and example use
 
-Try this [demo](http://rism-ch.github.io/midi-player/) for seeing / hearing it running.
+Try this [demo](http://rism-digital.github.io/midi-player/) for seeing / hearing it running.
 
 Once included in your page, you only need to do (where song is a Base64 coded midi file):
 

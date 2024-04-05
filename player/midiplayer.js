@@ -70,7 +70,6 @@ var emptyBuffer;
 function initAudio() {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)({sampleRate:SAMPLE_RATE});
     scriptNode = audioCtx.createScriptProcessor(BUFFER, 0, channels);
-    scriptNode.onaudioprocess = onAudioProcess;
     
     source = audioCtx.createBufferSource();
     circularBuffer = new CircularAudioBuffer(8);
@@ -81,7 +80,8 @@ function initAudio() {
     console.debug("initAudio");
 }
 
-function startAudio() {    
+function startAudio() {
+    scriptNode.onaudioprocess = onAudioProcess;
     scriptNode.connect(audioCtx.destination);
     console.debug("startAudio");
 }
@@ -89,7 +89,7 @@ function startAudio() {
 function pauseAudio() {
     circularBuffer.reset();
     scriptNode.disconnect();
-	console.debug("pauseAudio");
+    console.debug("pauseAudio");
 }
 
 
@@ -285,6 +285,7 @@ function stop() {
     _EM_seekSamples = 0;
     circularBuffer.reset();
     pauseAudio();
+    scriptNode.onaudioprocess = null;
 	
     midiPlayer_totalSamples = 0;
     midiPlayer_currentSamples = ULONG_MAX;
